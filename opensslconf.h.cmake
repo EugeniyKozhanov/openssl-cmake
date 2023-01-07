@@ -27,9 +27,26 @@ extern "C" {
 #ifndef OPENSSL_NO_RC5
 # define OPENSSL_NO_RC5
 #endif
-#ifndef OPENSSL_THREADS
-# define OPENSSL_THREADS
+
+#ifndef __NDS__
+	#ifndef OPENSSL_THREADS
+	# define OPENSSL_THREADS
+	#endif
+#else
+	#ifndef OPENSSL_NO_SOCK
+	# define OPENSSL_NO_SOCK
+	#endif
+	#ifndef OPENSSL_NO_UI_CONSOLE
+	# define OPENSSL_NO_UI_CONSOLE
+	#endif
+	#ifndef OPENSSL_NO_DGRAM
+	# define OPENSSL_NO_DGRAM
+	#endif
+	#ifndef NO_SYSLOG
+	# define NO_SYSLOG
+	#endif
 #endif
+
 #ifndef OPENSSL_RAND_SEED_OS
 # define OPENSSL_RAND_SEED_OS
 #endif

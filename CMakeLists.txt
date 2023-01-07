@@ -177,7 +177,7 @@ configure_file( ${PROJECT_BINARY_DIR}/opensslconf.h.cmake
 add_subdirectory(crypto)
 add_subdirectory(ssl)
 
-if( WITH_APPS AND NOT ANDROID AND NOT IOS )
+if( WITH_APPS AND NOT ANDROID AND NOT IOS AND NOT NDS_PORT)
   add_subdirectory(apps)
 
   file( READ ${PROJECT_SOURCE_DIR}/c_rehash.cmake C_REHASH )

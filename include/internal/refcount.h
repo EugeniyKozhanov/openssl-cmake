@@ -17,13 +17,13 @@
 # endif
 
 # if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L \
-     && !defined(__STDC_NO_ATOMICS__)
+     && !defined(__STDC_NO_ATOMICS__) && !defined(__NDS__)
 #  include <stdatomic.h>
 #  define HAVE_C11_ATOMICS
 # endif
 
 # if defined(HAVE_C11_ATOMICS) && defined(ATOMIC_INT_LOCK_FREE) \
-     && ATOMIC_INT_LOCK_FREE > 0
+     && ATOMIC_INT_LOCK_FREE > 0 && !defined(__NDS__)
 
 #  define HAVE_ATOMICS 1
 
@@ -53,7 +53,7 @@ static inline int CRYPTO_DOWN_REF(_Atomic int *val, int *ret, void *lock)
     return 1;
 }
 
-# elif defined(__GNUC__) && defined(__ATOMIC_RELAXED) && __GCC_ATOMIC_INT_LOCK_FREE > 0
+# elif defined(__GNUC__) && defined(__ATOMIC_RELAXED) && __GCC_ATOMIC_INT_LOCK_FREE > 0 && !defined(__NDS__)
 
 #  define HAVE_ATOMICS 1
 
@@ -73,7 +73,7 @@ static __inline__ int CRYPTO_DOWN_REF(int *val, int *ret, void *lock)
     return 1;
 }
 
-# elif defined(_MSC_VER) && _MSC_VER>=1200
+# elif defined(_MSC_VER) && _MSC_VER>=1200 && !defined(__NDS__)
 
 #  define HAVE_ATOMICS 1
 
